@@ -1,16 +1,41 @@
-# React + Vite
+# SOAP Note Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A local React + Vite app that turns raw clinical notes or voice transcripts into editable SOAP notes using Groq's Chat Completions API.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Install dependencies:
 
-## React Compiler
+   ```bash
+   npm install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Create `.env` from the example file:
 
-## Expanding the Oxlint configuration
+   ```powershell
+   Copy-Item .env.example .env
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+3. Add your server-side Groq API key:
+
+   ```env
+   VITE_GROQ_API_KEY=your-groq-api-key-here
+   ```
+
+4. Start the frontend and API proxy:
+
+   ```bash
+   npm run dev
+   ```
+
+The Vite frontend proxies `/api/generate` to the Express server on port `3001`.
+
+## Scripts
+
+- `npm run dev` starts the Express proxy and Vite together.
+- `npm run dev:frontend` starts only Vite.
+- `npm run dev:server` starts only the API proxy.
+- `npm run build` creates a production frontend build.
+- `npm run lint` runs Oxlint.
+
+Generated SOAP notes are drafts and must be reviewed by a licensed clinician.
